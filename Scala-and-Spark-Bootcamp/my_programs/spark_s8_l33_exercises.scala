@@ -36,6 +36,7 @@ def equalSplit(balance:List[Int]): Boolean = {
   Range(1,listlength).exists(isBalancedAt)
 }
 
+ //
 val hasSplit = List(1,2,3)
 val noSplit = List(1,2,3,4)
 
