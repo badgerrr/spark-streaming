@@ -1,50 +1,43 @@
-def evens(num:Int): Boolean = {
-  num%2== 0
+def isEven(num:Int): Boolean = {
+  num%2==0
 }
 
-evens(5)
-evens(6)
-
-def isEvenList(numlist:List[Int]): Boolean = {
-  for(x <- numlist){
-    if (x%2==0){
-      return true
-    }
-  }
-return false
+def evenList(numlist:List[Int]): Boolean = {
+  numlist.exists(x => x%2==0)
 }
 
-val oddList = List(1,3,5,7)
-val evenList = List(1,2,3,4)
+val myList = List(1,2,3,4,5) //true
+val myOddList = List(1,3,5,7) //false
 
-isEvenList(oddList)
-isEvenList(evenList)
+evenList(myList)
+evenList(myOddList)
 
-
-def luckySeven(luckylist:List[Int]): Int ={
-  luckylist.map(x => if(x == 7) x*2 else x).sum
+def luckySeven(luckylist:List[Int]): Int = {
+  luckylist.map(x => if(x==7) 14 else x).sum
 }
 
-val notLucky = List(1,2,3,4,5,6)
-val isLucky  = List(1,2,3,4,5,6,7)
+val nosevens = List(1,2,3,4,5,6) //21
+val sevens = List(1,2,3,4,5,6,7,7) //49
 
-luckySeven(notLucky)
-luckySeven(isLucky)
+luckySeven(nosevens)
+luckySeven(sevens)
 
+//sum left, sum right, are they equal?
 
-def isEvenSplit(splitList:List[Int]): Boolean = {
-  val listLength = splitList.length
-
-  def splitListAt(splitPoint:Int): Boolean = {
-    val (listA, listB) = splitList.splitAt(splitPoint)
-    listA == listB
+def equalSplit(balance:List[Int]): Boolean = {
+  def isBalancedAt(pos: Int): Boolean = {
+    val (left, right) = balance.splitAt(pos)
+    left.sum == right.sum
   }
 
-Range(1,listLength).map(x => splitListAt(x))
+  val listlength = balance.length
+
+  (1 until listlength).exists(x=>isBalancedAt(x))
+  Range(1,listlength).exists(isBalancedAt)
 }
 
-val canSplit = List(1,2,3)
-val cannotSplit = List(1,2,3,4)
+val hasSplit = List(1,2,3)
+val noSplit = List(1,2,3,4)
 
-isEvenSplit(canSplit)
-isEvenSplit(cannotSplit)
+equalSplit(hasSplit)
+equalSplit(noSplit)
